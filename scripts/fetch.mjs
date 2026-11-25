@@ -120,7 +120,7 @@ function importance(m, table) {
   return parts.join(" ");
 }
 
-let laLiga = [];
+const standings = {};
 
 async function leagueMatches(from, to) {
   const out = [];
@@ -133,14 +133,15 @@ async function leagueMatches(from, to) {
       const total = s.standings.find((x) => x.type === "TOTAL") ?? s.standings[0];
       for (const r of total.table)
         table.set(r.team.id, { position: r.position, points: r.points, played: r.playedGames, name: r.team.shortName ?? r.team.name });
-      if (code === "PD") {
-        laLiga = total.table.map((r) => ({
+      standings[code] = {
+        name,
+        rows: total.table.map((r) => ({
           pos: r.position, team: r.team.shortName ?? r.team.name,
           played: r.playedGames, won: r.won, draw: r.draw, lost: r.lost,
           gf: r.goalsFor, ga: r.goalsAgainst, gd: r.goalDifference, pts: r.points,
           highlight: tag("fd", r.team, null),
-        }));
-      }
+        })),
+      };
     } catch (e) { console.warn(e.message); }
 
     const venues = new Map();
@@ -248,5 +249,5 @@ const all = [...(await leagueMatches(from, to)), ...(await espnMatches(from, to)
 
 await mkdir("data", { recursive: true });
 await writeFile("data/matches.json", JSON.stringify(
-  { updated: new Date().toISOString(), standings: { laLiga }, matches: all }, null, 1));
+  { updated: new Date().toISOString(), standings, matches: all }, null, 1));
 console.log(`Wrote ${all.length} matches (${from} to ${to})`);
