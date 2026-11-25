@@ -1,11 +1,15 @@
 name: Update matches
 on:
   schedule:
-    - cron: "0 5,15 * * *"   # twice a day, UTC
+    - cron: "17 5,13,22 * * *"   # UTC: about 06:17, 14:17 and 23:17 in Madrid (winter)
   workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: update-matches
+  cancel-in-progress: false
 
 jobs:
   update:
@@ -18,11 +22,12 @@ jobs:
       - run: node scripts/fetch.mjs
         env:
           FOOTBALL_DATA_KEY: ${{ secrets.FOOTBALL_DATA_KEY }}
-          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
       - name: Commit data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/matches.json
-          git diff --cached --quiet || git commit -m "Update matches"
+          git diff --cached --quiet && exit 0
+          git commit -m "Update matches"
+          git pull --rebase
           git push
