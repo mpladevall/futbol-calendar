@@ -100,6 +100,7 @@
   td:first-child { border-left: 3px solid transparent; }
   tr.top td:first-child { border-left-color: var(--accent); }
   tr.drop td:first-child { border-left-color: var(--red); }
+  tr.mid td:first-child { border-left-color: var(--gold); }
   tr.barca td:nth-child(2), tr.madrid td:nth-child(2) { font-weight: 700; color: var(--gold); }
   td:last-child { font-weight: 800; }
   .legend { color: var(--muted); font-size: .8rem; margin-top: 10px; }
@@ -136,11 +137,11 @@ const fromKey = (k) => { const [y, m, d] = k.split("-").map(Number); return new 
 const groupBy = (items, fn) => items.reduce((map, x) => map.set(fn(x), [...(map.get(fn(x)) ?? []), x]), new Map());
 const order = (a, b) => !!b.highlight - !!a.highlight || a.date - b.date;
 const LABELS = { barca: "Barça", madrid: "Real Madrid", clasico: "El Clásico" };
-const VIEWS = { calendar: "Calendar", upcoming: "Upcoming", results: "Results", table: "La Liga table" };
+const VIEWS = { calendar: "Calendar", upcoming: "Upcoming", results: "Results", table: "Tables" };
 
-let matches = [], standings = [], today = dayKey(new Date());
+let matches = [], standings = {}, today = dayKey(new Date());
 const state = {
-  view: "calendar", comps: new Set(), onlyBig: false,
+  view: "calendar", comps: new Set(), onlyBig: false, table: "PD",
   month: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
   selected: today,
 };
@@ -162,9 +163,8 @@ async function load() {
     const date = new Date(m.utcDate);
     return { ...m, date, day: dayKey(date) };
   });
-  standings = data.standings?.laLiga ?? [];
-  $("updated").textContent =
-    `Times shown in your timezone. Updated ${new Date(data.updated).toLocaleString([], { dateStyle: "medium", timeStyle: "short" })}.`;
+  standings = data.standings ?? {};
+  if (standings.laLiga) standings = { PD: { name: "La Liga", rows: standings.laLiga } }; // old data format
 }
 
 function toggle(parent, cls, label, isOn, onClick) {
@@ -319,15 +319,36 @@ function renderList(view, results) {
   }
 }
 
+const ZONES = {
+  CL: { top: 8, mid: 24 },
+  BL1: { top: 4, drop: 2 },
+  FL1: { top: 3, drop: 2 },
+};
+
 function renderTable(view) {
-  if (!standings.length)
+  const codes = Object.keys(standings);
+  if (!codes.length)
     return view.append(el("p", "empty", "No standings yet. They appear after the next data update."));
+  if (!standings[state.table]) state.table = codes[0];
+
+  const picker = el("div", "filters");
+  for (const code of codes) {
+    const b = el("button", "chip", standings[code].name);
+    b.setAttribute("aria-pressed", code === state.table);
+    b.onclick = () => { state.table = code; render(); };
+    picker.append(b);
+  }
+
+  const { name, rows } = standings[state.table];
+  const z = ZONES[state.table] ?? { top: 4, drop: 3 };
   const table = el("table");
   const head = el("tr");
   for (const h of ["#", "Team", "P", "W", "D", "L", "GF", "GA", "GD", "Pts"]) head.append(el("th", "", h));
   table.append(head);
-  for (const r of standings) {
-    const zone = r.pos <= 4 ? "top" : r.pos > standings.length - 3 ? "drop" : "";
+  for (const r of rows) {
+    const zone = r.pos <= z.top ? "top"
+      : z.mid ? (r.pos <= z.mid ? "mid" : "drop")
+      : r.pos > rows.length - z.drop ? "drop" : "";
     const tr = el("tr", [r.highlight, zone].filter(Boolean).join(" "));
     const gd = (r.gd > 0 ? "+" : "") + r.gd;
     for (const v of [r.pos, r.team, r.played, r.won, r.draw, r.lost, r.gf, r.ga, gd, r.pts]) tr.append(el("td", "", v));
@@ -335,11 +356,18 @@ function renderTable(view) {
   }
   const wrap = el("div", "tablewrap");
   wrap.append(table);
+
   const legend = el("p", "legend");
   const key = (color, text) => { const i = el("i"); i.style.background = color; legend.append(i, text); };
-  key("var(--accent)", "Champions League places");
-  key("var(--red)", "Relegation");
-  view.append(el("h2", "", "La Liga table"), wrap, legend);
+  if (z.mid) {
+    key("var(--accent)", "Straight to the last 16");
+    key("var(--gold)", "Play-off round");
+    key("var(--red)", "Eliminated");
+  } else {
+    key("var(--accent)", "Champions League places");
+    key("var(--red)", "Relegation");
+  }
+  view.append(picker, el("h2", "", `${name} table`), wrap, legend);
 }
 
 function render() {
