@@ -7,13 +7,22 @@
 <style>
   :root {
     --bg: #0d1411; --card: #17211c; --line: #25332b; --text: #eef3ef; --muted: #8da197;
-    --accent: #7ddc9a; --blau: #004d98; --grana: #a50044; --gold: #febe10;
+    --accent: #7ddc9a; --blau: #004d98; --grana: #a50044; --gold: #febe10; --red: #ff6b6b;
   }
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.45 system-ui, sans-serif; }
   main { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
   h1 { font-size: 1.7rem; margin: 0 0 4px; letter-spacing: -0.02em; }
-  .updated { color: var(--muted); font-size: .85rem; margin: 0 0 20px; }
+  .updated { color: var(--muted); font-size: .85rem; margin: 0 0 16px; }
+
+  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin-bottom: 14px; overflow-x: auto; }
+  .tab {
+    border: 0; background: none; color: var(--muted); font: inherit; font-weight: 600; white-space: nowrap;
+    padding: 8px 12px; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px;
+  }
+  .tab[aria-pressed="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+
   .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
   .chip {
     border: 1px solid var(--line); background: none; color: var(--muted); font: inherit; font-size: .85rem;
@@ -21,13 +30,39 @@
   }
   .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #08120c; font-weight: 600; }
   .chip.big[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); }
+
   h2 {
-    position: sticky; top: 0; background: var(--bg); margin: 28px 0 10px; padding: 8px 0;
+    position: sticky; top: 0; z-index: 1; background: var(--bg); margin: 28px 0 10px; padding: 8px 0;
     font-size: .8rem; text-transform: uppercase; letter-spacing: .12em; color: var(--accent);
     border-bottom: 1px solid var(--line);
   }
+
+  /* Calendar */
+  .calhead { display: flex; align-items: center; gap: 8px; margin: 16px 0 10px; }
+  .calmonth { flex: 1; text-align: center; font-size: 1.1rem; text-transform: capitalize; }
+  .cal { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+  .dow { text-align: center; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding: 4px 0; }
+  .day {
+    display: flex; flex-direction: column; gap: 3px; min-height: 84px; padding: 6px; overflow: hidden;
+    text-align: left; font: inherit; color: inherit; cursor: pointer;
+    background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+  }
+  .day.none { background: none; }
+  .day.today .num { color: var(--accent); font-weight: 800; }
+  .day.selected { outline: 2px solid var(--accent); outline-offset: -1px; }
+  .num { font-size: .85rem; font-variant-numeric: tabular-nums; }
+  .pill {
+    display: block; font-size: .66rem; font-weight: 700; border-radius: 4px; padding: 1px 4px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .pill.barca { background: var(--grana); color: #fff; }
+  .pill.madrid { background: #fff; color: #111; }
+  .pill.clasico { background: var(--gold); color: #111; }
+  .more { font-size: .7rem; color: var(--muted); }
+
+  /* Match cards */
   .match {
-    position: relative; overflow: hidden; display: grid; grid-template-columns: 64px 1fr; gap: 14px;
+    position: relative; overflow: hidden; display: grid; grid-template-columns: 72px 1fr; gap: 14px;
     background: var(--card); border: 1px solid var(--line); border-radius: 10px;
     padding: 14px 16px 14px 20px; margin-bottom: 10px;
   }
@@ -39,103 +74,306 @@
   .match.madrid { background: linear-gradient(90deg, rgba(254, 190, 16, .16), var(--card) 60%); border-color: #5c4d1c; }
   .match.clasico { background: linear-gradient(90deg, rgba(165, 0, 68, .3), rgba(254, 190, 16, .18)); border-color: var(--gold); }
   .time { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 1.05rem; }
-  .score { display: block; color: var(--muted); font-size: .85rem; font-weight: 500; }
+  .sub { display: block; color: var(--muted); font-size: .78rem; font-weight: 500; }
+  .sub.soon { color: var(--accent); font-weight: 700; }
+  .sub.live { color: var(--red); font-weight: 700; }
   .meta { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
   .badge { color: var(--gold); font-weight: 700; margin-left: 6px; }
   .teams { font-size: 1.1rem; font-weight: 650; margin: 2px 0; }
-  .teams span { color: var(--muted); font-weight: 400; margin: 0 6px; }
+  .teams .mid { color: var(--muted); font-weight: 500; margin: 0 8px; font-variant-numeric: tabular-nums; }
+  .teams .mid.score { color: var(--text); font-weight: 800; }
+  .teams .lost { color: var(--muted); font-weight: 450; }
+  .result { font-size: .88rem; font-weight: 600; color: var(--accent); }
   .venue { font-size: .85rem; color: var(--muted); }
   .why { margin: 8px 0 0; font-size: .92rem; }
+  .addcal { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 8px; font-size: .82rem; }
+  .addcal a { color: var(--accent); text-decoration: none; }
+  .addcal a:hover { text-decoration: underline; }
   .empty { color: var(--muted); padding: 40px 0; text-align: center; }
+
+  /* Standings */
+  .tablewrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: .92rem; font-variant-numeric: tabular-nums; }
+  th, td { padding: 8px 6px; text-align: right; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; }
+  th:nth-child(2), td:nth-child(2) { text-align: left; width: 100%; }
+  td:first-child { border-left: 3px solid transparent; }
+  tr.top td:first-child { border-left-color: var(--accent); }
+  tr.drop td:first-child { border-left-color: var(--red); }
+  tr.barca td:nth-child(2), tr.madrid td:nth-child(2) { font-weight: 700; color: var(--gold); }
+  td:last-child { font-weight: 800; }
+  .legend { color: var(--muted); font-size: .8rem; margin-top: 10px; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin: 0 4px 0 10px; }
+
+  @media (max-width: 600px) {
+    .day { min-height: 54px; padding: 4px; }
+    .pill { font-size: 0; padding: 0; height: 6px; }
+    .more .w { display: none; }
+    th:nth-child(7), td:nth-child(7), th:nth-child(8), td:nth-child(8) { display: none; }
+  }
 </style>
 </head>
 <body>
 <main>
   <h1>Fútbol Calendar</h1>
   <p class="updated" id="updated">Loading…</p>
+  <nav class="tabs" id="tabs"></nav>
   <div class="filters" id="filters"></div>
-  <div id="list"></div>
+  <div id="view"></div>
 </main>
 
 <script type="module">
+const $ = (id) => document.getElementById(id);
 const el = (tag, cls, text) => {
   const n = document.createElement(tag);
   if (cls) n.className = cls;
   if (text != null) n.textContent = text;
   return n;
 };
-const dayKey = (d) => d.toLocaleDateString("en-CA"); // YYYY-MM-DD in the viewer's timezone
+const pad = (n) => String(n).padStart(2, "0");
+const dayKey = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; // viewer's timezone
+const fromKey = (k) => { const [y, m, d] = k.split("-").map(Number); return new Date(y, m - 1, d); };
+const groupBy = (items, fn) => items.reduce((map, x) => map.set(fn(x), [...(map.get(fn(x)) ?? []), x]), new Map());
+const order = (a, b) => !!b.highlight - !!a.highlight || a.date - b.date;
 const LABELS = { barca: "Barça", madrid: "Real Madrid", clasico: "El Clásico" };
+const VIEWS = { calendar: "Calendar", upcoming: "Upcoming", results: "Results", table: "La Liga table" };
 
-let data;
+let matches = [], standings = [], today = dayKey(new Date());
+const state = {
+  view: "calendar", comps: new Set(), onlyBig: false,
+  month: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
+  selected: today,
+};
+
+const daysUntil = (key) => Math.round((fromKey(key) - fromKey(today)) / 864e5);
+const relative = (key) => {
+  const n = daysUntil(key);
+  return n === 0 ? "Today" : n === 1 ? "Tomorrow" : n === -1 ? "Yesterday" : n >= 2 && n <= 14 ? `In ${n} days` : null;
+};
+const heading = (key) => {
+  const long = fromKey(key).toLocaleDateString([], { weekday: "long", day: "numeric", month: "long" });
+  const rel = relative(key);
+  return rel ? `${rel} · ${long}` : long;
+};
+
+async function load() {
+  const data = await (await fetch("data/matches.json", { cache: "no-store" })).json();
+  matches = data.matches.map((m) => {
+    const date = new Date(m.utcDate);
+    return { ...m, date, day: dayKey(date) };
+  });
+  standings = data.standings?.laLiga ?? [];
+  $("updated").textContent =
+    `Times shown in your timezone. Updated ${new Date(data.updated).toLocaleString([], { dateStyle: "medium", timeStyle: "short" })}.`;
+}
+
+function toggle(parent, cls, label, isOn, onClick) {
+  const b = el("button", cls, label);
+  b.sync = () => b.setAttribute("aria-pressed", isOn());
+  b.onclick = () => { onClick(); render(); };
+  parent.append(b);
+}
+
+const filtered = () => matches.filter((m) =>
+  (!state.onlyBig || m.highlight) && (!state.comps.size || state.comps.has(m.competition)));
+
+// ---------- Add to calendar ----------
+const stamp = (d) => d.toISOString().replace(/[-:]|\.\d{3}/g, "");
+const icsText = (s) => String(s).replace(/([\\;,])/g, "\\$1");
+
+function calendarLinks(m) {
+  const title = `${m.home} vs ${m.away}`;
+  const end = new Date(+m.date + 2 * 36e5);
+  const details = [m.competition, m.stageLabel].filter(Boolean).join(" · ");
+  const wrap = el("div", "addcal");
+
+  const g = el("a", "", "+ Google Calendar");
+  g.href = "https://calendar.google.com/calendar/render?" + new URLSearchParams({
+    action: "TEMPLATE", text: title, dates: `${stamp(m.date)}/${stamp(end)}`, details, location: m.venue ?? "",
+  });
+  g.target = "_blank";
+  g.rel = "noopener";
+
+  const ics = [
+    "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//futbol-calendar//EN", "BEGIN:VEVENT",
+    `UID:${m.id}@futbol-calendar`, `DTSTAMP:${stamp(new Date())}`,
+    `DTSTART:${stamp(m.date)}`, `DTEND:${stamp(end)}`,
+    `SUMMARY:${icsText(title)}`, `DESCRIPTION:${icsText(details)}`, `LOCATION:${icsText(m.venue ?? "")}`,
+    "END:VEVENT", "END:VCALENDAR",
+  ].join("\r\n");
+  const i = el("a", "", "+ Apple / Outlook (.ics)");
+  i.href = "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
+  i.download = `${title}.ics`;
+
+  wrap.append(g, i);
+  return wrap;
+}
+
+// ---------- Match card ----------
+function card(m) {
+  const done = m.status === "FINISHED", live = m.status === "LIVE";
+  const hasScore = (done || live) && m.homeGoals != null && m.awayGoals != null;
+  const c = el("article", "match " + (m.highlight ?? ""));
+
+  const time = el("div", "time", m.date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
+  const rel = relative(m.day);
+  if (done) time.append(el("span", "sub", "Full time"));
+  else if (live) time.append(el("span", "sub live", "Live"));
+  else if (m.status === "POSTPONED") time.append(el("span", "sub", "Postponed"));
+  else if (m.status === "CANCELLED") time.append(el("span", "sub", "Cancelled"));
+  else if (rel && daysUntil(m.day) >= 0) time.append(el("span", "sub soon", rel));
+
+  const body = el("div");
+  const meta = el("div", "meta", [m.competition, m.stageLabel].filter(Boolean).join(" · "));
+  if (m.highlight) meta.append(el("span", "badge", "★ " + LABELS[m.highlight]));
+
+  const decided = done && (m.winner === "home" || m.winner === "away");
+  const side = (name, s) => el("span", decided ? (m.winner === s ? "won" : "lost") : "", name);
+  const teams = el("div", "teams");
+  teams.append(
+    side(m.home, "home"),
+    el("span", "mid" + (hasScore ? " score" : ""), hasScore ? `${m.homeGoals} – ${m.awayGoals}` : "vs"),
+    side(m.away, "away"));
+  body.append(meta, teams);
+
+  if (done && m.winner) {
+    const who = m.winner === "draw" ? "Draw" : `${m.winner === "home" ? m.home : m.away} won`;
+    body.append(el("div", "result", m.winner !== "draw" && m.note ? `${who} ${m.note}` : who));
+  }
+  if (m.venue) body.append(el("div", "venue", m.venue));
+  if (m.importance) body.append(el("p", "why", m.importance));
+  if (m.status === "SCHEDULED" && m.date > Date.now()) body.append(calendarLinks(m));
+
+  c.append(time, body);
+  return c;
+}
+
+// ---------- Views ----------
+function renderCalendar(view) {
+  const byDay = groupBy(filtered(), (m) => m.day);
+  const y = state.month.getFullYear(), mo = state.month.getMonth();
+
+  const nav = (label, aria, fn) => {
+    const b = el("button", "chip", label);
+    b.setAttribute("aria-label", aria);
+    b.onclick = () => { fn(); render(); };
+    return b;
+  };
+  const head = el("div", "calhead");
+  head.append(
+    nav("‹", "Previous month", () => (state.month = new Date(y, mo - 1, 1))),
+    el("strong", "calmonth", state.month.toLocaleDateString([], { month: "long", year: "numeric" })),
+    nav("›", "Next month", () => (state.month = new Date(y, mo + 1, 1))),
+    nav("Today", "Go to today", () => {
+      const now = new Date();
+      state.month = new Date(now.getFullYear(), now.getMonth(), 1);
+      state.selected = today;
+    }));
+
+  const grid = el("div", "cal");
+  for (let i = 0; i < 7; i++) // 1 January 2024 was a Monday
+    grid.append(el("div", "dow", new Date(2024, 0, 1 + i).toLocaleDateString([], { weekday: "short" })));
+  const lead = (new Date(y, mo, 1).getDay() + 6) % 7;
+  for (let i = 0; i < lead; i++) grid.append(el("div"));
+
+  const daysInMonth = new Date(y, mo + 1, 0).getDate();
+  for (let d = 1; d <= daysInMonth; d++) {
+    const key = `${y}-${pad(mo + 1)}-${pad(d)}`;
+    const items = byDay.get(key) ?? [];
+    const cell = el("button", "day"
+      + (key === today ? " today" : "") + (key === state.selected ? " selected" : "") + (items.length ? "" : " none"));
+    cell.setAttribute("aria-label", `${heading(key)}, ${items.length} matches`);
+    cell.append(el("span", "num", d));
+
+    const big = items.filter((m) => m.highlight).sort(order).slice(0, 2);
+    for (const m of big) {
+      const h = m.homeCode ?? m.home, a = m.awayCode ?? m.away;
+      const text = m.status === "FINISHED" && m.homeGoals != null ? `${h} ${m.homeGoals}-${m.awayGoals} ${a}` : `${h} – ${a}`;
+      cell.append(el("span", "pill " + m.highlight, text));
+    }
+    const rest = items.length - big.length;
+    if (rest > 0) {
+      const more = el("span", "more", big.length ? `+${rest}` : `${rest}`);
+      more.append(el("span", "w", big.length ? " more" : rest === 1 ? " match" : " matches"));
+      cell.append(more);
+    }
+    cell.onclick = () => { state.selected = key; render(); };
+    grid.append(cell);
+  }
+
+  view.append(head, grid, el("h2", "", heading(state.selected)));
+  const items = (byDay.get(state.selected) ?? []).sort(order);
+  if (!items.length) view.append(el("p", "empty", "No matches on this day."));
+  for (const m of items) view.append(card(m));
+}
+
+function renderList(view, results) {
+  const shown = filtered().filter((m) => (results ? m.status === "FINISHED" : m.day >= today));
+  if (!shown.length) return view.append(el("p", "empty", "No matches for these filters."));
+  const days = groupBy(shown, (m) => m.day);
+  const keys = [...days.keys()].sort();
+  if (results) keys.reverse();
+  for (const key of keys) {
+    view.append(el("h2", "", heading(key)));
+    for (const m of days.get(key).sort(order)) view.append(card(m));
+  }
+}
+
+function renderTable(view) {
+  if (!standings.length)
+    return view.append(el("p", "empty", "No standings yet. They appear after the next data update."));
+  const table = el("table");
+  const head = el("tr");
+  for (const h of ["#", "Team", "P", "W", "D", "L", "GF", "GA", "GD", "Pts"]) head.append(el("th", "", h));
+  table.append(head);
+  for (const r of standings) {
+    const zone = r.pos <= 4 ? "top" : r.pos > standings.length - 3 ? "drop" : "";
+    const tr = el("tr", [r.highlight, zone].filter(Boolean).join(" "));
+    const gd = (r.gd > 0 ? "+" : "") + r.gd;
+    for (const v of [r.pos, r.team, r.played, r.won, r.draw, r.lost, r.gf, r.ga, gd, r.pts]) tr.append(el("td", "", v));
+    table.append(tr);
+  }
+  const wrap = el("div", "tablewrap");
+  wrap.append(table);
+  const legend = el("p", "legend");
+  const key = (color, text) => { const i = el("i"); i.style.background = color; legend.append(i, text); };
+  key("var(--accent)", "Champions League places");
+  key("var(--red)", "Relegation");
+  view.append(el("h2", "", "La Liga table"), wrap, legend);
+}
+
+function render() {
+  today = dayKey(new Date());
+  for (const b of $("tabs").children) b.sync();
+  for (const b of $("filters").children) b.sync();
+  $("filters").hidden = state.view === "table";
+  const view = $("view");
+  view.replaceChildren();
+  if (state.view === "calendar") renderCalendar(view);
+  else if (state.view === "table") renderTable(view);
+  else renderList(view, state.view === "results");
+}
+
+// ---------- Start ----------
 try {
-  data = await (await fetch("data/matches.json", { cache: "no-store" })).json();
+  await load();
 } catch {
-  document.getElementById("updated").textContent = "Could not load data/matches.json.";
+  $("updated").textContent = "Could not load data/matches.json.";
   throw new Error("no data");
 }
 
-const today = dayKey(new Date());
-const tomorrow = dayKey(new Date(Date.now() + 864e5));
-const matches = data.matches
-  .map((m) => ({ ...m, date: new Date(m.utcDate) }))
-  .filter((m) => dayKey(m.date) >= today);
-
-document.getElementById("updated").textContent =
-  `Times shown in your timezone. Updated ${new Date(data.updated).toLocaleString([], { dateStyle: "medium", timeStyle: "short" })}.`;
-
-const state = { comps: new Set(), onlyBig: false };
-const filters = document.getElementById("filters");
-
-function chip(label, cls, isOn, toggle) {
-  const b = el("button", "chip " + cls, label);
-  b.setAttribute("aria-pressed", isOn());
-  b.onclick = () => { toggle(); render(); };
-  b.sync = () => b.setAttribute("aria-pressed", isOn());
-  filters.append(b);
-}
-chip("Barça & Madrid only", "big", () => state.onlyBig, () => (state.onlyBig = !state.onlyBig));
+for (const [id, label] of Object.entries(VIEWS))
+  toggle($("tabs"), "tab", label, () => state.view === id, () => (state.view = id));
+toggle($("filters"), "chip big", "Barça & Madrid only", () => state.onlyBig, () => (state.onlyBig = !state.onlyBig));
 for (const c of [...new Set(matches.map((m) => m.competition))])
-  chip(c, "", () => state.comps.has(c), () => (state.comps.has(c) ? state.comps.delete(c) : state.comps.add(c)));
+  toggle($("filters"), "chip", c, () => state.comps.has(c), () => (state.comps.has(c) ? state.comps.delete(c) : state.comps.add(c)));
 
-function render() {
-  for (const b of filters.children) b.sync();
-  const list = document.getElementById("list");
-  list.replaceChildren();
-
-  const shown = matches.filter((m) =>
-    (!state.onlyBig || m.highlight) && (!state.comps.size || state.comps.has(m.competition)));
-  if (!shown.length) return list.append(el("p", "empty", "No matches for these filters."));
-
-  const days = Map.groupBy ? Map.groupBy(shown, (m) => dayKey(m.date))
-    : shown.reduce((map, m) => map.set(dayKey(m.date), [...(map.get(dayKey(m.date)) ?? []), m]), new Map());
-
-  for (const [key, items] of days) {
-    const long = items[0].date.toLocaleDateString([], { weekday: "long", day: "numeric", month: "long" });
-    list.append(el("h2", "", key === today ? `Today · ${long}` : key === tomorrow ? `Tomorrow · ${long}` : long));
-
-    items.sort((a, b) => !!b.highlight - !!a.highlight || a.date - b.date);
-    for (const m of items) {
-      const card = el("article", "match " + (m.highlight ?? ""));
-
-      const time = el("div", "time", m.date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
-      if (m.score) time.append(el("span", "score", "FT " + m.score));
-
-      const body = el("div");
-      const meta = el("div", "meta", [m.competition, m.stageLabel].filter(Boolean).join(" · "));
-      if (m.highlight) meta.append(el("span", "badge", "★ " + LABELS[m.highlight]));
-      const teams = el("div", "teams");
-      teams.append(m.home, el("span", "", "vs"), m.away);
-      body.append(meta, teams);
-      if (m.venue) body.append(el("div", "venue", m.venue));
-      if (m.importance) body.append(el("p", "why", m.importance));
-
-      card.append(time, body);
-      list.append(card);
-    }
-  }
-}
 render();
+
+// Pick up new data without a manual refresh
+const refresh = () => load().then(render).catch(() => {});
+setInterval(refresh, 30 * 60 * 1000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) refresh(); });
 </script>
 </body>
 </html>
