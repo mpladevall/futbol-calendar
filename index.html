@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fútbol Calendar</title>
+<style>
+  :root {
+    --bg: #0d1411; --card: #17211c; --line: #25332b; --text: #eef3ef; --muted: #8da197;
+    --accent: #7ddc9a; --blau: #004d98; --grana: #a50044; --gold: #febe10;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.45 system-ui, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 1.7rem; margin: 0 0 4px; letter-spacing: -0.02em; }
+  .updated { color: var(--muted); font-size: .85rem; margin: 0 0 20px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+  .chip {
+    border: 1px solid var(--line); background: none; color: var(--muted); font: inherit; font-size: .85rem;
+    padding: 6px 12px; border-radius: 999px; cursor: pointer;
+  }
+  .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #08120c; font-weight: 600; }
+  .chip.big[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); }
+  h2 {
+    position: sticky; top: 0; background: var(--bg); margin: 28px 0 10px; padding: 8px 0;
+    font-size: .8rem; text-transform: uppercase; letter-spacing: .12em; color: var(--accent);
+    border-bottom: 1px solid var(--line);
+  }
+  .match {
+    position: relative; overflow: hidden; display: grid; grid-template-columns: 64px 1fr; gap: 14px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: 14px 16px 14px 20px; margin-bottom: 10px;
+  }
+  .match::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 6px; }
+  .match.barca::before { background: linear-gradient(var(--blau) 50%, var(--grana) 50%); }
+  .match.madrid::before { background: linear-gradient(#fff 50%, var(--gold) 50%); }
+  .match.clasico::before { background: linear-gradient(var(--blau) 25%, var(--grana) 25% 50%, #fff 50% 75%, var(--gold) 75%); }
+  .match.barca { background: linear-gradient(90deg, rgba(165, 0, 68, .22), var(--card) 60%); border-color: #5a2440; }
+  .match.madrid { background: linear-gradient(90deg, rgba(254, 190, 16, .16), var(--card) 60%); border-color: #5c4d1c; }
+  .match.clasico { background: linear-gradient(90deg, rgba(165, 0, 68, .3), rgba(254, 190, 16, .18)); border-color: var(--gold); }
+  .time { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 1.05rem; }
+  .score { display: block; color: var(--muted); font-size: .85rem; font-weight: 500; }
+  .meta { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .badge { color: var(--gold); font-weight: 700; margin-left: 6px; }
+  .teams { font-size: 1.1rem; font-weight: 650; margin: 2px 0; }
+  .teams span { color: var(--muted); font-weight: 400; margin: 0 6px; }
+  .venue { font-size: .85rem; color: var(--muted); }
+  .why { margin: 8px 0 0; font-size: .92rem; }
+  .empty { color: var(--muted); padding: 40px 0; text-align: center; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Fútbol Calendar</h1>
+  <p class="updated" id="updated">Loading…</p>
+  <div class="filters" id="filters"></div>
+  <div id="list"></div>
+</main>
+
+<script type="module">
+const el = (tag, cls, text) => {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;
+  return n;
+};
+const dayKey = (d) => d.toLocaleDateString("en-CA"); // YYYY-MM-DD in the viewer's timezone
+const LABELS = { barca: "Barça", madrid: "Real Madrid", clasico: "El Clásico" };
+
+let data;
+try {
+  data = await (await fetch("data/matches.json", { cache: "no-store" })).json();
+} catch {
+  document.getElementById("updated").textContent = "Could not load data/matches.json.";
+  throw new Error("no data");
+}
+
+const today = dayKey(new Date());
+const tomorrow = dayKey(new Date(Date.now() + 864e5));
+const matches = data.matches
+  .map((m) => ({ ...m, date: new Date(m.utcDate) }))
+  .filter((m) => dayKey(m.date) >= today);
+
+document.getElementById("updated").textContent =
+  `Times shown in your timezone. Updated ${new Date(data.updated).toLocaleString([], { dateStyle: "medium", timeStyle: "short" })}.`;
+
+const state = { comps: new Set(), onlyBig: false };
+const filters = document.getElementById("filters");
+
+function chip(label, cls, isOn, toggle) {
+  const b = el("button", "chip " + cls, label);
+  b.setAttribute("aria-pressed", isOn());
+  b.onclick = () => { toggle(); render(); };
+  b.sync = () => b.setAttribute("aria-pressed", isOn());
+  filters.append(b);
+}
+chip("Barça & Madrid only", "big", () => state.onlyBig, () => (state.onlyBig = !state.onlyBig));
+for (const c of [...new Set(matches.map((m) => m.competition))])
+  chip(c, "", () => state.comps.has(c), () => (state.comps.has(c) ? state.comps.delete(c) : state.comps.add(c)));
+
+function render() {
+  for (const b of filters.children) b.sync();
+  const list = document.getElementById("list");
+  list.replaceChildren();
+
+  const shown = matches.filter((m) =>
+    (!state.onlyBig || m.highlight) && (!state.comps.size || state.comps.has(m.competition)));
+  if (!shown.length) return list.append(el("p", "empty", "No matches for these filters."));
+
+  const days = Map.groupBy ? Map.groupBy(shown, (m) => dayKey(m.date))
+    : shown.reduce((map, m) => map.set(dayKey(m.date), [...(map.get(dayKey(m.date)) ?? []), m]), new Map());
+
+  for (const [key, items] of days) {
+    const long = items[0].date.toLocaleDateString([], { weekday: "long", day: "numeric", month: "long" });
+    list.append(el("h2", "", key === today ? `Today · ${long}` : key === tomorrow ? `Tomorrow · ${long}` : long));
+
+    items.sort((a, b) => !!b.highlight - !!a.highlight || a.date - b.date);
+    for (const m of items) {
+      const card = el("article", "match " + (m.highlight ?? ""));
+
+      const time = el("div", "time", m.date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
+      if (m.score) time.append(el("span", "score", "FT " + m.score));
+
+      const body = el("div");
+      const meta = el("div", "meta", [m.competition, m.stageLabel].filter(Boolean).join(" · "));
+      if (m.highlight) meta.append(el("span", "badge", "★ " + LABELS[m.highlight]));
+      const teams = el("div", "teams");
+      teams.append(m.home, el("span", "", "vs"), m.away);
+      body.append(meta, teams);
+      if (m.venue) body.append(el("div", "venue", m.venue));
+      if (m.importance) body.append(el("p", "why", m.importance));
+
+      card.append(time, body);
+      list.append(card);
+    }
+  }
+}
+render();
+</script>
+</body>
+</html>
