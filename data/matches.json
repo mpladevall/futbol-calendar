@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-26T04:12:29.207Z",
+ "updated": "2026-11-26T15:20:39.222Z",
  "standings": {
   "PD": {
    "name": "La Liga",
@@ -271,141 +271,89 @@
    "rows": [
     {
      "pos": 1,
-     "team": "Real Madrid",
-     "played": 5,
-     "won": 5,
+     "team": "PSG",
+     "played": 4,
+     "won": 4,
      "draw": 0,
      "lost": 0,
-     "gf": 18,
-     "ga": 8,
-     "gd": 10,
-     "pts": 15,
-     "highlight": "madrid"
-    },
-    {
-     "pos": 2,
-     "team": "PSG",
-     "played": 5,
-     "won": 4,
-     "draw": 1,
-     "lost": 0,
-     "gf": 22,
-     "ga": 7,
+     "gf": 20,
+     "ga": 5,
      "gd": 15,
-     "pts": 13,
+     "pts": 12,
      "highlight": null
     },
     {
-     "pos": 3,
-     "team": "Como 1907",
-     "played": 5,
+     "pos": 2,
+     "team": "Real Madrid",
+     "played": 4,
      "won": 4,
      "draw": 0,
-     "lost": 1,
-     "gf": 20,
-     "ga": 6,
-     "gd": 14,
+     "lost": 0,
+     "gf": 13,
+     "ga": 7,
+     "gd": 6,
      "pts": 12,
+     "highlight": "madrid"
+    },
+    {
+     "pos": 3,
+     "team": "Aston Villa",
+     "played": 5,
+     "won": 3,
+     "draw": 1,
+     "lost": 1,
+     "gf": 12,
+     "ga": 6,
+     "gd": 6,
+     "pts": 10,
      "highlight": null
     },
     {
      "pos": 4,
-     "team": "Barça",
-     "played": 5,
-     "won": 4,
-     "draw": 0,
-     "lost": 1,
-     "gf": 18,
-     "ga": 7,
-     "gd": 11,
-     "pts": 12,
-     "highlight": "barca"
+     "team": "Arsenal",
+     "played": 4,
+     "won": 3,
+     "draw": 1,
+     "lost": 0,
+     "gf": 8,
+     "ga": 3,
+     "gd": 5,
+     "pts": 10,
+     "highlight": null
     },
     {
      "pos": 5,
-     "team": "Liverpool",
-     "played": 5,
-     "won": 4,
+     "team": "Como 1907",
+     "played": 4,
+     "won": 3,
      "draw": 0,
      "lost": 1,
-     "gf": 17,
-     "ga": 10,
-     "gd": 7,
-     "pts": 12,
+     "gf": 19,
+     "ga": 6,
+     "gd": 13,
+     "pts": 9,
      "highlight": null
     },
     {
      "pos": 6,
-     "team": "Real Betis",
-     "played": 5,
-     "won": 4,
+     "team": "Barça",
+     "played": 4,
+     "won": 3,
      "draw": 0,
      "lost": 1,
-     "gf": 10,
+     "gf": 14,
      "ga": 6,
-     "gd": 4,
-     "pts": 12,
-     "highlight": null
+     "gd": 8,
+     "pts": 9,
+     "highlight": "barca"
     },
     {
      "pos": 7,
-     "team": "Arsenal",
-     "played": 5,
-     "won": 3,
-     "draw": 2,
-     "lost": 0,
-     "gf": 9,
-     "ga": 4,
-     "gd": 5,
-     "pts": 11,
-     "highlight": null
-    },
-    {
-     "pos": 8,
      "team": "Man City",
-     "played": 5,
-     "won": 3,
-     "draw": 1,
-     "lost": 1,
-     "gf": 14,
-     "ga": 9,
-     "gd": 5,
-     "pts": 10,
-     "highlight": null
-    },
-    {
-     "pos": 9,
-     "team": "Sporting CP",
-     "played": 5,
-     "won": 3,
-     "draw": 1,
-     "lost": 1,
-     "gf": 10,
-     "ga": 6,
-     "gd": 4,
-     "pts": 10,
-     "highlight": null
-    },
-    {
-     "pos": 10,
-     "team": "Dortmund",
-     "played": 5,
-     "won": 3,
-     "draw": 1,
-     "lost": 1,
-     "gf": 8,
-     "ga": 6,
-     "gd": 2,
-     "pts": 10,
-     "highlight": null
-    },
-    {
-     "pos": 11,
-     "team": "Aston Villa",
-     "played": 5,
+     "played": 4,
      "won": 3,
      "draw": 0,
-     "lost": 2,
+     "lost": 1,
      "gf": 12,
      "ga": 7,
      "gd": 5,
@@ -413,194 +361,220 @@
      "highlight": null
     },
     {
-     "pos": 12,
-     "team": "Inter",
-     "played": 5,
+     "pos": 8,
+     "team": "Liverpool",
+     "played": 4,
      "won": 3,
      "draw": 0,
-     "lost": 2,
-     "gf": 10,
-     "ga": 6,
+     "lost": 1,
+     "gf": 14,
+     "ga": 10,
      "gd": 4,
      "pts": 9,
      "highlight": null
     },
     {
-     "pos": 13,
+     "pos": 9,
      "team": "Club Brugge",
-     "played": 5,
+     "played": 4,
      "won": 3,
      "draw": 0,
-     "lost": 2,
+     "lost": 1,
      "gf": 11,
-     "ga": 10,
-     "gd": 1,
+     "ga": 7,
+     "gd": 4,
      "pts": 9,
+     "highlight": null
+    },
+    {
+     "pos": 10,
+     "team": "Sporting CP",
+     "played": 4,
+     "won": 3,
+     "draw": 0,
+     "lost": 1,
+     "gf": 8,
+     "ga": 4,
+     "gd": 4,
+     "pts": 9,
+     "highlight": null
+    },
+    {
+     "pos": 11,
+     "team": "Real Betis",
+     "played": 4,
+     "won": 3,
+     "draw": 0,
+     "lost": 1,
+     "gf": 8,
+     "ga": 6,
+     "gd": 2,
+     "pts": 9,
+     "highlight": null
+    },
+    {
+     "pos": 12,
+     "team": "Dortmund",
+     "played": 4,
+     "won": 3,
+     "draw": 0,
+     "lost": 1,
+     "gf": 7,
+     "ga": 5,
+     "gd": 2,
+     "pts": 9,
+     "highlight": null
+    },
+    {
+     "pos": 13,
+     "team": "Bayern",
+     "played": 4,
+     "won": 2,
+     "draw": 2,
+     "lost": 0,
+     "gf": 12,
+     "ga": 5,
+     "gd": 7,
+     "pts": 8,
      "highlight": null
     },
     {
      "pos": 14,
-     "team": "Galatasaray",
-     "played": 5,
-     "won": 3,
-     "draw": 0,
-     "lost": 2,
-     "gf": 9,
-     "ga": 9,
-     "gd": 0,
-     "pts": 9,
+     "team": "Stuttgart",
+     "played": 4,
+     "won": 2,
+     "draw": 1,
+     "lost": 1,
+     "gf": 7,
+     "ga": 4,
+     "gd": 3,
+     "pts": 7,
      "highlight": null
     },
     {
      "pos": 15,
-     "team": "Bayern",
-     "played": 5,
-     "won": 2,
-     "draw": 2,
-     "lost": 1,
-     "gf": 13,
-     "ga": 7,
-     "gd": 6,
-     "pts": 8,
-     "highlight": null
-    },
-    {
-     "pos": 16,
-     "team": "Fenerbahçe",
-     "played": 5,
-     "won": 2,
-     "draw": 2,
-     "lost": 1,
-     "gf": 7,
-     "ga": 11,
-     "gd": -4,
-     "pts": 8,
-     "highlight": null
-    },
-    {
-     "pos": 17,
-     "team": "Stuttgart",
-     "played": 5,
-     "won": 2,
-     "draw": 1,
-     "lost": 2,
-     "gf": 7,
-     "ga": 6,
-     "gd": 1,
-     "pts": 7,
-     "highlight": null
-    },
-    {
-     "pos": 18,
-     "team": "Atleti",
-     "played": 5,
-     "won": 2,
-     "draw": 1,
-     "lost": 2,
-     "gf": 6,
-     "ga": 5,
-     "gd": 1,
-     "pts": 7,
-     "highlight": null
-    },
-    {
-     "pos": 19,
-     "team": "Man United",
+     "team": "LASK",
      "played": 5,
      "won": 2,
      "draw": 1,
      "lost": 2,
      "gf": 10,
-     "ga": 10,
-     "gd": 0,
+     "ga": 9,
+     "gd": 1,
      "pts": 7,
+     "highlight": null
+    },
+    {
+     "pos": 16,
+     "team": "Galatasaray",
+     "played": 5,
+     "won": 2,
+     "draw": 1,
+     "lost": 2,
+     "gf": 8,
+     "ga": 9,
+     "gd": -1,
+     "pts": 7,
+     "highlight": null
+    },
+    {
+     "pos": 17,
+     "team": "Inter",
+     "played": 4,
+     "won": 2,
+     "draw": 0,
+     "lost": 2,
+     "gf": 8,
+     "ga": 6,
+     "gd": 2,
+     "pts": 6,
+     "highlight": null
+    },
+    {
+     "pos": 18,
+     "team": "Man United",
+     "played": 4,
+     "won": 2,
+     "draw": 0,
+     "lost": 2,
+     "gf": 8,
+     "ga": 8,
+     "gd": 0,
+     "pts": 6,
+     "highlight": null
+    },
+    {
+     "pos": 19,
+     "team": "Fenerbahçe",
+     "played": 4,
+     "won": 1,
+     "draw": 2,
+     "lost": 1,
+     "gf": 6,
+     "ga": 11,
+     "gd": -5,
+     "pts": 5,
      "highlight": null
     },
     {
      "pos": 20,
      "team": "Bodø/Glimt",
      "played": 5,
-     "won": 2,
-     "draw": 1,
-     "lost": 2,
-     "gf": 5,
-     "ga": 9,
-     "gd": -4,
-     "pts": 7,
-     "highlight": null
-    },
-    {
-     "pos": 21,
-     "team": "LASK",
-     "played": 5,
-     "won": 2,
-     "draw": 0,
-     "lost": 3,
-     "gf": 10,
-     "ga": 10,
-     "gd": 0,
-     "pts": 6,
-     "highlight": null
-    },
-    {
-     "pos": 22,
-     "team": "Porto",
-     "played": 5,
-     "won": 2,
-     "draw": 0,
-     "lost": 3,
-     "gf": 7,
-     "ga": 7,
-     "gd": 0,
-     "pts": 6,
-     "highlight": null
-    },
-    {
-     "pos": 23,
-     "team": "RB Leipzig",
-     "played": 5,
-     "won": 2,
-     "draw": 0,
-     "lost": 3,
-     "gf": 8,
-     "ga": 12,
-     "gd": -4,
-     "pts": 6,
-     "highlight": null
-    },
-    {
-     "pos": 24,
-     "team": "Villarreal",
-     "played": 5,
-     "won": 2,
-     "draw": 0,
-     "lost": 3,
-     "gf": 9,
-     "ga": 14,
-     "gd": -5,
-     "pts": 6,
-     "highlight": null
-    },
-    {
-     "pos": 25,
-     "team": "Roma",
-     "played": 5,
      "won": 1,
      "draw": 2,
      "lost": 2,
-     "gf": 12,
-     "ga": 10,
-     "gd": 2,
+     "gf": 4,
+     "ga": 9,
+     "gd": -5,
      "pts": 5,
      "highlight": null
     },
     {
-     "pos": 26,
-     "team": "Shaktar",
-     "played": 5,
+     "pos": 21,
+     "team": "Roma",
+     "played": 4,
      "won": 1,
      "draw": 1,
-     "lost": 3,
+     "lost": 2,
+     "gf": 10,
+     "ga": 8,
+     "gd": 2,
+     "pts": 4,
+     "highlight": null
+    },
+    {
+     "pos": 22,
+     "team": "Shaktar",
+     "played": 4,
+     "won": 1,
+     "draw": 1,
+     "lost": 2,
+     "gf": 4,
+     "ga": 4,
+     "gd": 0,
+     "pts": 4,
+     "highlight": null
+    },
+    {
+     "pos": 23,
+     "team": "Viking",
+     "played": 4,
+     "won": 1,
+     "draw": 1,
+     "lost": 2,
+     "gf": 9,
+     "ga": 10,
+     "gd": -1,
+     "pts": 4,
+     "highlight": null
+    },
+    {
+     "pos": 24,
+     "team": "Atleti",
+     "played": 4,
+     "won": 1,
+     "draw": 1,
+     "lost": 2,
      "gf": 4,
      "ga": 5,
      "gd": -1,
@@ -608,132 +582,158 @@
      "highlight": null
     },
     {
+     "pos": 25,
+     "team": "PSV",
+     "played": 4,
+     "won": 1,
+     "draw": 1,
+     "lost": 2,
+     "gf": 3,
+     "ga": 4,
+     "gd": -1,
+     "pts": 4,
+     "highlight": null
+    },
+    {
+     "pos": 26,
+     "team": "Porto",
+     "played": 4,
+     "won": 1,
+     "draw": 0,
+     "lost": 3,
+     "gf": 6,
+     "ga": 7,
+     "gd": -1,
+     "pts": 3,
+     "highlight": null
+    },
+    {
      "pos": 27,
-     "team": "Viking",
-     "played": 5,
-     "won": 1,
-     "draw": 1,
-     "lost": 3,
-     "gf": 9,
-     "ga": 12,
-     "gd": -3,
-     "pts": 4,
-     "highlight": null
-    },
-    {
-     "pos": 28,
      "team": "Napoli",
-     "played": 5,
+     "played": 4,
      "won": 1,
-     "draw": 1,
-     "lost": 3,
-     "gf": 8,
-     "ga": 13,
-     "gd": -5,
-     "pts": 4,
-     "highlight": null
-    },
-    {
-     "pos": 29,
-     "team": "Lille",
-     "played": 5,
-     "won": 1,
-     "draw": 1,
+     "draw": 0,
      "lost": 3,
      "gf": 6,
      "ga": 11,
      "gd": -5,
-     "pts": 4,
+     "pts": 3,
      "highlight": null
     },
     {
-     "pos": 30,
-     "team": "PSV",
-     "played": 5,
+     "pos": 28,
+     "team": "Villarreal",
+     "played": 4,
      "won": 1,
-     "draw": 1,
+     "draw": 0,
      "lost": 3,
-     "gf": 4,
-     "ga": 9,
-     "gd": -5,
-     "pts": 4,
+     "gf": 8,
+     "ga": 14,
+     "gd": -6,
+     "pts": 3,
+     "highlight": null
+    },
+    {
+     "pos": 29,
+     "team": "PAE AEK",
+     "played": 4,
+     "won": 1,
+     "draw": 0,
+     "lost": 3,
+     "gf": 5,
+     "ga": 11,
+     "gd": -6,
+     "pts": 3,
+     "highlight": null
+    },
+    {
+     "pos": 29,
+     "team": "RB Leipzig",
+     "played": 4,
+     "won": 1,
+     "draw": 0,
+     "lost": 3,
+     "gf": 5,
+     "ga": 11,
+     "gd": -6,
+     "pts": 3,
      "highlight": null
     },
     {
      "pos": 31,
-     "team": "PAE AEK",
-     "played": 5,
+     "team": "Sabah FK",
+     "played": 4,
      "won": 1,
      "draw": 0,
-     "lost": 4,
-     "gf": 5,
-     "ga": 12,
-     "gd": -7,
+     "lost": 3,
+     "gf": 4,
+     "ga": 10,
+     "gd": -6,
      "pts": 3,
      "highlight": null
     },
     {
      "pos": 32,
      "team": "Feyenoord",
-     "played": 5,
+     "played": 4,
      "won": 1,
      "draw": 0,
-     "lost": 4,
+     "lost": 3,
      "gf": 4,
-     "ga": 12,
-     "gd": -8,
+     "ga": 11,
+     "gd": -7,
      "pts": 3,
      "highlight": null
     },
     {
      "pos": 33,
-     "team": "Sabah FK",
-     "played": 5,
+     "team": "RC Lens",
+     "played": 4,
      "won": 1,
      "draw": 0,
-     "lost": 4,
-     "gf": 5,
-     "ga": 14,
-     "gd": -9,
+     "lost": 3,
+     "gf": 4,
+     "ga": 16,
+     "gd": -12,
      "pts": 3,
      "highlight": null
     },
     {
      "pos": 34,
-     "team": "RC Lens",
-     "played": 5,
-     "won": 1,
-     "draw": 0,
-     "lost": 4,
+     "team": "Slavia Praha",
+     "played": 4,
+     "won": 0,
+     "draw": 1,
+     "lost": 3,
      "gf": 5,
-     "ga": 19,
-     "gd": -14,
-     "pts": 3,
+     "ga": 9,
+     "gd": -4,
+     "pts": 1,
      "highlight": null
     },
     {
      "pos": 35,
-     "team": "Slavia Praha",
-     "played": 5,
+     "team": "Lille",
+     "played": 4,
      "won": 0,
      "draw": 1,
-     "lost": 4,
-     "gf": 5,
+     "lost": 3,
+     "gf": 4,
      "ga": 10,
-     "gd": -5,
+     "gd": -6,
      "pts": 1,
      "highlight": null
     },
     {
      "pos": 36,
      "team": "Sl. Bratislava",
-     "played": 5,
+     "played": 4,
      "won": 0,
      "draw": 0,
-     "lost": 5,
+     "lost": 4,
      "gf": 1,
-     "ga": 19,
-     "gd": -18,
+     "ga": 17,
+     "gd": -16,
      "pts": 0,
      "highlight": null
     }
@@ -6992,7 +6992,7 @@
    "venue": "Estadio de la Cerámica",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "24th vs 33rd in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "28th vs 31st in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575414",
@@ -7007,7 +7007,7 @@
    "venue": "SR-Bank Arena",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "27th vs 32nd in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "23rd vs 32nd in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575415",
@@ -7022,7 +7022,7 @@
    "venue": "Camp Nou",
    "status": "SCHEDULED",
    "highlight": "barca",
-   "importance": "4th vs 8th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "6th vs 7th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575416",
@@ -7037,7 +7037,7 @@
    "venue": "Villa Park",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "11th vs 2nd in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "3rd vs 1st in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575417",
@@ -7052,7 +7052,7 @@
    "venue": "Allianz Arena",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "15th vs 35th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "13th vs 34th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575418",
@@ -7067,7 +7067,7 @@
    "venue": "Stadio San Paolo",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "28th vs 13th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "27th vs 9th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575419",
@@ -7082,7 +7082,7 @@
    "venue": "Stadio Olimpico",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "25th vs 9th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "21st vs 10th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575420",
@@ -7097,7 +7097,7 @@
    "venue": "Old Trafford",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "19th vs 23rd in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "18th vs 29th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575421",
@@ -7112,7 +7112,7 @@
    "venue": "Olympiako Stadio Spyros Louis",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "31st vs 14th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "29th vs 16th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575422",
@@ -7127,7 +7127,7 @@
    "venue": "Estadio Benito Villamarín",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "6th vs 3rd in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "11th vs 5th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575423",
@@ -7142,7 +7142,7 @@
    "venue": "Štadión Tehelné pole",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "36th vs 26th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "36th vs 22nd in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-564698",
@@ -7172,7 +7172,7 @@
    "venue": "Emirates Stadium",
    "status": "SCHEDULED",
    "highlight": "madrid",
-   "importance": "7th vs 1st in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "4th vs 2nd in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575286",
@@ -7187,7 +7187,7 @@
    "venue": "Signal Iduna Park",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "10th vs 12th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "12th vs 17th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575290",
@@ -7202,7 +7202,7 @@
    "venue": "Philips Stadion",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "30th vs 18th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "25th vs 24th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575295",
@@ -7217,7 +7217,7 @@
    "venue": "Anfield",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "5th vs 22nd in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "8th vs 26th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575315",
@@ -7232,7 +7232,7 @@
    "venue": "Stade Bollaert-Delelis",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "34th vs 20th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "33rd vs 20th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575317",
@@ -7247,7 +7247,7 @@
    "venue": "Raiffeisen Arena",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "21st vs 16th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "15th vs 19th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575322",
@@ -7262,7 +7262,7 @@
    "venue": "Mercedes-Benz Arena",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "17th vs 29th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "14th vs 35th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-565888",
@@ -11057,7 +11057,7 @@
    "venue": "Aspmyra Stadion",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "20th vs 18th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "20th vs 24th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575318",
@@ -11072,7 +11072,7 @@
    "venue": "Türk Telekom Arena",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "14th vs 32nd in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "16th vs 32nd in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575282",
@@ -11087,7 +11087,7 @@
    "venue": "Estadio Santiago Bernabéu",
    "status": "SCHEDULED",
    "highlight": "madrid",
-   "importance": "1st vs 21st in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "2nd vs 15th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575285",
@@ -11102,7 +11102,7 @@
    "venue": "Stadio Giuseppe Meazza",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "12th vs 5th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "17th vs 8th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575302",
@@ -11117,7 +11117,7 @@
    "venue": "Mercedes-Benz Arena",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "17th vs 13th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "14th vs 9th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575303",
@@ -11132,7 +11132,7 @@
    "venue": "Villa Park",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "11th vs 10th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "3rd vs 12th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575307",
@@ -11147,7 +11147,7 @@
    "venue": "Olympiako Stadio Spyros Louis",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "31st vs 25th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "29th vs 21st in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575308",
@@ -11162,7 +11162,7 @@
    "venue": "Estádio Do Dragão",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "22nd vs 35th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "26th vs 34th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575321",
@@ -11177,7 +11177,7 @@
    "venue": "Stade Pierre-Mauroy",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "29th vs 36th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "35th vs 36th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575314",
@@ -11192,7 +11192,7 @@
    "venue": "Ülker Stadyumu Fenerbahçe Şükrü Saracoğlu Spor Kompleksi",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "16th vs 24th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "19th vs 28th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575320",
@@ -11207,7 +11207,7 @@
    "venue": null,
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "33rd vs 28th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "31st vs 27th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575284",
@@ -11222,7 +11222,7 @@
    "venue": "Stade Bollaert-Delelis",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "34th vs 8th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "33rd vs 7th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575288",
@@ -11237,7 +11237,7 @@
    "venue": "Estádio José Alvalade",
    "status": "SCHEDULED",
    "highlight": "barca",
-   "importance": "9th vs 4th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "10th vs 6th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575294",
@@ -11252,7 +11252,7 @@
    "venue": "Stadio Giuseppe Sinigaglia",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "3rd vs 2nd in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "5th vs 1st in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575297",
@@ -11267,7 +11267,7 @@
    "venue": "Estadio Benito Villamarín",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "6th vs 7th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "11th vs 4th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575300",
@@ -11282,7 +11282,7 @@
    "venue": "Old Trafford",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "19th vs 15th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "18th vs 13th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575312",
@@ -11297,7 +11297,7 @@
    "venue": "SR-Bank Arena",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "27th vs 30th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "23rd vs 25th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-575313",
@@ -11312,7 +11312,7 @@
    "venue": "Red Bull Arena",
    "status": "SCHEDULED",
    "highlight": null,
-   "importance": "23rd vs 26th in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
+   "importance": "29th vs 22nd in the league phase. Top 8 go straight to the last 16, 9th to 24th face a play-off."
   },
   {
    "id": "fd-565929",
